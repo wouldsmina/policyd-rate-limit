@@ -229,6 +229,14 @@ class Policyd(object):
                         sys.stderr.write("Attribute 'protocol_state' not defined\n")
                         sys.stderr.flush()
                         raise Pass()
+                    # if recipient is part of exempt_recipients, jump to Pass
+                    if config.exempt_recipients and u'recipient' in request:
+                        for exempt_recipient in config.exempt_recipients:
+                            if exempt_recipient in request[u'recipient']:
+                                if config.debug:
+                                    sys.stderr.write("recipient %s in exempt_recipients\n" % (request[u'recipient']))
+                                    sys.stderr.flush()
+                                raise Pass()
                     if config.count_mode not in {0, 1}:
                         sys.stderr.write("Settings 'count_mode' bad value %r\n" % (
                             config.count_mode,

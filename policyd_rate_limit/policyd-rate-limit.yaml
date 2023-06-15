@@ -37,6 +37,10 @@ SOCKET: "/var/spool/postfix/ratelimit/policy"
 # Permissions on the unix socket (if unix socket used).
 socket_permission: 0666
 
+# A list of recipient addresses or domains to exclude from the counter
+# exempt_recipients: ["domain.tld", 'name@domain2.tld']
+exempt_recipients: []
+
 # A list of couple [number of emails, number of seconds]. If one of the element of the list is
 # exeeded (more than 'number of emails' on 'number of seconds' for an ip address or an sasl
 # username), postfix will return a temporary failure.
